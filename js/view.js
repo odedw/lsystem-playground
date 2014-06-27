@@ -11,8 +11,11 @@ define('view',
         return {
             init: function (){
                 canvas = document.getElementsByTagName('canvas')[0];
-                canvas.width  = canvas.offsetWidth;
-                canvas.height = canvas.offsetHeight;
+                var minScreenAspect = Math.min(canvas.offsetWidth, canvas.offsetHeight);
+                var size = Math.max(model.system.size.width, model.system.size.height);
+                var sizePerPixel = size * 1.5 / minScreenAspect;
+                canvas.width  = canvas.offsetWidth * sizePerPixel;
+                canvas.height = canvas.offsetHeight * sizePerPixel;
                 context = canvas.getContext("2d");
                 context.strokeStyle = model.color;
                 context.lineWidth = 1;
@@ -20,8 +23,8 @@ define('view',
 
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 context.scale(model.scale, model.scale);
-                currentPosition.x = 0;
-                currentPosition.y = context.canvas.height / (2 * model.scale);
+                currentPosition.x = context.canvas.width * model.startingPosition.x;
+                currentPosition.y = context.canvas.height * (model.startingPosition.y * model.scale);
                 currentPosition.angle = Math.PI/2;
                 context.beginPath();
             },
