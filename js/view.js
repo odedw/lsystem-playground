@@ -13,7 +13,7 @@ define('view',
                 canvas = document.getElementsByTagName('canvas')[0];
                 var minScreenAspect = Math.min(canvas.offsetWidth, canvas.offsetHeight);
                 var size = Math.max(model.system.size.width, model.system.size.height);
-                var sizePerPixel = size * 1.5 / minScreenAspect;
+                var sizePerPixel = size * 1.2 / minScreenAspect;
                 canvas.width  = canvas.offsetWidth * sizePerPixel;
                 canvas.height = canvas.offsetHeight * sizePerPixel;
                 context = canvas.getContext("2d");
